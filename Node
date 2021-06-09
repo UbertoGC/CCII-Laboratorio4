@@ -1,0 +1,29 @@
+#ifndef __NODE_H__
+#define __NODE_H__
+class Node{
+private:
+    int elem;
+    Node *next;
+public:
+    Node();
+    void Modificar(int);
+    int Valor();
+    Node *Siguiente(){
+        return next;
+    }
+    void Llenar(Node);
+};
+Node::Node(){
+    elem=0;
+}
+void Node::Modificar(int m){
+    elem=m;
+}
+int Node::Valor(){
+    return elem;
+}
+void Node::Llenar(Node m){
+    next=new Node();
+    *next=m;
+}
+#endif
