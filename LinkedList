@@ -1,0 +1,117 @@
+#ifndef __LINKEDLIST_H__
+#define __LINKEDLIST_H__
+#include "Node.h"
+class LinkedList;
+std::ostream& operator << (std::ostream &o, const LinkedList &a);
+class LinkedList{
+private:
+    int size;
+    Node* head;
+public:
+    LinkedList();
+    void Insert(int);
+    void remove(int);
+    friend std::ostream& operator <<(std::ostream &o, const LinkedList &a);
+    void print(int);
+    ~LinkedList();
+};
+LinkedList::LinkedList(){
+    size=0;
+    head=new Node();
+}
+void LinkedList::Insert(int t){
+    if(size==0){
+        head->Modificar(t);
+        size+=1;
+    }
+    else{
+        Node *cdi;
+        cdi=head;
+        for (int i=1; i<size; i++){
+            cdi=cdi->Siguiente();
+        }
+        Node a;
+        a.Modificar(t);
+        cdi->Llenar(a);
+        size +=1;
+    }
+}
+void LinkedList::remove(int a){
+    if(size>0){
+        Node *cdi; 
+        Node *sec;
+        cdi=head;
+        if(cdi->Valor()==a){
+            head=head->Siguiente();
+            size--;
+        }
+        else{
+            int i=0;
+            for(i=0; i<size; i++){
+                if(i==0){
+                    sec=head;
+                }
+                if(cdi->Valor()!=a){
+                    if(i>0){
+                        sec=sec->Siguiente();
+                    }
+                    cdi=cdi->Siguiente();
+                }
+                else{
+                    break;
+                }
+            }
+            if(i<size-1){
+                cdi=cdi->Siguiente();
+                sec->Llenar(*cdi);
+                size--;
+            }
+            else if (i==size-1){
+                cdi=NULL;
+                size--;
+            }
+            else{
+                std::cout<<"Elemento no encontrado en la lista"<<std::endl;
+                
+            }
+        }
+    }
+}
+void LinkedList::print(int t){
+    Node *cdi;
+    cdi=head;
+    int i=0;
+    for (i=0; i<size; i++){
+        if(cdi->Valor()!=t){
+            cdi=cdi->Siguiente();
+        }
+        else{
+            break;
+        }
+    }
+    if(i<size){
+        i++;
+        std::cout<<"Valor: "<<cdi->Valor()<<", Posicion: "<<i<<"\n";
+    }
+    else{
+        std::cout<<"Valor no encontrado en la lista"<<"\n";
+    }
+}
+std::ostream& operator << (std::ostream &o, const LinkedList &a){
+    Node *cdi;
+    cdi=a.head;
+    for (int i=0; i<a.size; i++){
+        if(i<a.size-1){
+            o<<cdi->Valor()<<" -- ";
+        }
+        else{
+            o<<cdi->Valor()<<'\n';
+        }
+        cdi=cdi->Siguiente();
+    }
+    return o;
+}
+LinkedList::~LinkedList(){
+    delete head;
+}
+#endif
