@@ -1,0 +1,51 @@
+#include <iostream>
+#include "LinkedList.h"
+using namespace std;
+int main(){
+    int t;
+    LinkedList a;
+    int z=0;
+    a.Insert(1);
+    a.Insert(2);
+    a.Insert(3);
+    a.Insert(4);
+    a.Insert(5);
+    a.Insert(6);
+    cout<<"-------------------------------------------"<<endl;
+    cout<<"La lista es esta: "<<endl;
+    cout<<a;
+    while(z<4&&z>-1){
+        cout<<"-------------------------------------------"<<endl;
+        cout<<"Escriba 0 para insertar un valor"<<"\n";
+        cout<<"Escriba 1 para remover un valor"<<"\n";
+        cout<<"Escriba 2 para buscar un elemento"<<"\n";
+        cout<<"Escriba 3 para imprimir toda la lista"<<"\n";
+        cout<<"Escriba cualquier otro numero para salir"<<"\n";
+        cout<<"-------------------------------------------"<<endl;
+        cin>>z;
+        cout<<"-------------------------------------------"<<endl;
+        switch (z)
+        {
+        case 0:
+            cout<<"Escriba el nuevo valor: ";cin>>t;
+            a.Insert(t);
+            break;
+        case 1:
+            cout<<"Escriba el valor a remover: ";cin>>t;
+            a.remove(t);
+            break;
+        case 2:
+            cout<<"Escriba el valor a buscar: ";cin>>t;
+            a.print(t);
+            break;
+        case 3:
+            cout<<"La lista es esta: "<<endl;
+            cout<<a;
+            break;
+        default:
+            cout<<"Saliendo..."<<endl;
+            break;
+        }
+    }
+    return 0;
+}
